@@ -15,10 +15,11 @@ test_truck = Truck("Ford", "F250", 2012, 6.7, "4WD" )
 print(test_truck.make)
 
 class Specifications(Truck): 
-    def __init__(self, mpg: int,trim_package, options, towing_capacity: int, payload: int, torque):
+    def __init__(self, mpg: int, trim_package, horsepower: int, towing_capacity: int, payload: int, torque):
         # Either work grade or limited editiion its up to the user, and their wallet to decide what is right for them to 
         self.trim_package = trim_package
         self.options = options
+        self.horsepower = horsepower
         # towing capacity is what you can tow with your truck, towing capacity is in pounds
         # some heavy duty trucks, use dually tires with largerear diffrentials to add towing power.
         self.towing_capacity = towing_capacity
@@ -30,5 +31,24 @@ class Specifications(Truck):
 
 
 class Tuning(Specifications, Truck):
-    def __init__(self, )
-    
+    def __init__(self, horsepower):
+        self.horsepower = horsepower
+
+    def delete_catalytic_converter(self):
+        return "ou no longer have a catalytic converter"
+
+
+    def add_horsepower_with_tune(self):
+        horsepower += 60
+        return f"your updated hp is: {horsepower}"
+
+
+truck_one = Tuning.add_horsepower()
+
+print(truck_one)
+
+class Mod(Specifications, Truck):
+    def __init__(self, add_heated_leather: str, increase_ride_height: float, add_wheels: str, ): 
+
+
+
