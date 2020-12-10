@@ -3,23 +3,20 @@ class Specifications:
     has_hitch = True
     def __init__(self, trim_package, horsepower: int, towing_capacity: int, payload: int,  torque: int):
 
+        # these are public attributes 
         self.trim_package = trim_package
-        
         self.horsepower = horsepower
-
         self.towing_capacity = towing_capacity
-        
         self.payload = payload
-   
         self.torque = torque
 
-    def update_towing_capacity(self):
+    def update_towing_capacity(self, towing_capacity):
         self.towing_capacity = towing_capacity
-        return ""
+        return
 
-    def update_horsepower(self):
+    def update_horsepower(self, horsepower):
         self.horsepower = horsepower
-        return ""
+        return 
 
     @classmethod
     def update_has_bed(cls, has_bed):
@@ -28,7 +25,7 @@ class Specifications:
             print("this truck has a bed!")
         else:
             print("this truck does not have a bed :(")
-        return ""
+        return 
 
     @classmethod
     def update_has_hitch(cls, has_hitch):
@@ -37,38 +34,32 @@ class Specifications:
             print("this truck has a hitch!")
         else:
             print("this truck does not have a hitch :(  very sad")
-        return ""
+        return 
 
 
+class Truck():
 
-
-class Truck:
-
-    is_heavy_duty = False
-    is_dually = False
+    is_heavy_duty = True
+    is_dually = True
 
     def __init__(self, make, model, year: int, engine_liter: float, drivetrain):
-        # I made these private because They do not need to be changed since these are basically the standards for truck
-        self.__make = make
-        self.__model = model
-        self.__year = year
-        self.__engine_liter = engine_liter
-        self.__drivetrain = drivetrain
+        # I made these public 
+        self.make = make
+        self.model = model
+        self.year = year
+        self.engine_liter = engine_liter
+        self.drivetrain = drivetrain
         self.specifications = []
-
-    def print_out_vehicle(self):
-        return f"Make: {self.__make}, Model: "
-
 
     # two class methods
     @classmethod
-    def update_is_dually(cls, is_dually):
+    def update_is_dually(cls, is_dually, towing_capacity):
         towing_capacity += 14000
         if cls.is_heavy_duty == True:
             print("This Truck is heavy duty")
         else: 
             print("This Truck is not heavy duty.")
-        return ""
+        return 
 
 
     @classmethod
@@ -77,15 +68,11 @@ class Truck:
             print("Your Truck is ready to haul.")
         else: 
             print("Your truck is light duty, you shouldn't exceed 7,000lbs.")
-        return ""
-        
-
-
+        return 
 
     def add_spec(self, spec_obj):
         self.specifications.append(spec_obj)
-        return ""
-
+        return 
 
     def display_spec(self):
 
@@ -96,6 +83,11 @@ class Truck:
             print(f"Towing Capacity: {spec.towing_capacity}")
             print(f"Payload: {spec.payload}")
             print(f"Torque: {spec.torque}")
+            print(f"has bed: {spec.has_bed}")
+            print(f"has hitch: {spec.has_hitch}")
+            print(f"is a dually: {Truck.is_dually}")
+            print(f"Is a heavy duty model: {Truck.is_heavy_duty}")
+         
         return "**** END VEHICLE SPECIFICATIONS ****"
                 
         
@@ -118,7 +110,7 @@ class Tuning(Specifications):
 
     def add_cold_air_intake(self):
         self.horsepower += 20
-        return f"Your Cold Air Intake added {self.}"
+        return f"Your Cold Air Intake added you gained {self.horsepower}hp."
 
     @classmethod
     def delete_catalytic_converter(cls, has_cat_converter):
@@ -126,7 +118,7 @@ class Tuning(Specifications):
             print("This truck has a catalytic converter!")
         else:
             print("This truck does not have a catalytic converter. roll some coal..")
-        return ""
+        return 
 
     
     
@@ -160,7 +152,7 @@ class Mod(Specifications):
             print("Already gotcha a lift kit I see...")
         else: 
             print("Your truck has a lift kit.")
-        return ""
+        return 
 
     @classmethod
     def add_wheels(cls, has_wheels):
@@ -169,16 +161,23 @@ class Mod(Specifications):
             print("this truck already has wheels.")
         else:
             print("You now have American Forces wheels.")
-        return ""
+        return 
     
     
 ########### TEST TRUCK AND SPECIFICATION CLASS ############
 
 #self, trim_package, horsepower: int, towing_capacity: int, payload: int, torque: int
-test_truck = Truck("GMC", "2500", 2011, 6.6, "4WD" ) 
+test_truck = Truck("GMC", "2500", 2011, 6.6, "4WD") 
+
+
 
 #this is composition, adding specifications and appending them.
 test_truck_spec = Specifications("Denali", 447, 15000, 3000, 730)
+
+test_has_bed = Truck.update_is_heavy_duty(False)
+test_is_heavy_duty = Truck.update_is_heavy_duty(False)
+test_hitch = test_truck_spec.update_has_hitch(True)
+test_bed = test_truck_spec.update_has_bed(True)
 
 # here I will add the Specifications to the Truck() init
 test_truck.add_spec(test_truck_spec)
@@ -191,11 +190,18 @@ test_truck.display_spec()
 
 
 ######### TUNING CLASS TEST #########
-
+#make an instance of the truck class pass in horsepower and torque
 tuner_truck = Tuning(397, 730)
-deleted_truck = Tuning.delete_catalytic_converter(False)
-print(deleted_truck)
+#add our cold air intake will add HP
+add_cold_air_intake = tuner_truck.add_cold_air_intake()
+# delete catalytic converter for better aspiration
+delete_cat_converter = tuner_truck.delete_catalytic_converter(False)
+# we will print out the cold air intake message and cat converter message
+print(add_cold_air_intake)
+print(delete_cat_converter)
 
+
+# now we will actually tune our vehicle!!
 truck_one = tuner_truck.add_horsepower_torque_with_tune()
 
 print(truck_one)
@@ -206,10 +212,16 @@ print(truck_one)
 
 ######### MOD CLASS TEST #########
 
-mod = Mod.add_lift_kit(False)
-mod_two = Mod.add_wheels(False)
+mod_truck = Mod(60, 3.5)
 
-print(mod)
-print(mod_two)
+mod_lift_kit = mod_truck.add_lift_kit(False)
+mod_wheels = mod_truck.add_wheels(False)
+
+mod_tint = mod_truck.max_tint_windows()
+mod_tailpipe = mod_truck.add_better_tailpipe()
+
+print(mod_lift_kit)
+print(mod_wheels)
+print(mod_tint)
 
 ######### MOD CLASS TEST END #########
