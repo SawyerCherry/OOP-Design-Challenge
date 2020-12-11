@@ -191,20 +191,20 @@ test_truck.display_spec()
 
 ######### TUNING CLASS TEST #########
 #make an instance of the truck class pass in horsepower and torque
-tuner_truck = Tuning(397, 730)
+#tuner_truck = Tuning(397, 730)
 #add our cold air intake will add HP
-add_cold_air_intake = tuner_truck.add_cold_air_intake()
+#add_cold_air_intake = tuner_truck.add_cold_air_intake()
 # delete catalytic converter for better aspiration
-delete_cat_converter = tuner_truck.delete_catalytic_converter(False)
+#delete_cat_converter = tuner_truck.delete_catalytic_converter(False)
 # we will print out the cold air intake message and cat converter message
-print(add_cold_air_intake)
-print(delete_cat_converter)
+#print(add_cold_air_intake)
+#print(delete_cat_converter)
 
 
 # now we will actually tune our vehicle!!
-truck_one = tuner_truck.add_horsepower_torque_with_tune()
+#truck_one = tuner_truck.add_horsepower_torque_with_tune()
 
-print(truck_one)
+#print(truck_one)
 
 ######### TUNING CLASS TEST END #########
 
@@ -212,16 +212,17 @@ print(truck_one)
 
 ######### MOD CLASS TEST #########
 
-mod_truck = Mod(60, 3.5)
+#mod_truck = Mod(60, 3.5)
 
-mod_lift_kit = mod_truck.add_lift_kit(False)
-mod_wheels = mod_truck.add_wheels(False)
+#mod_lift_kit = mod_truck.add_lift_kit(False)
+#mod_wheels = mod_truck.add_wheels(False)
 
-mod_tint = mod_truck.max_tint_windows()
-mod_tailpipe = mod_truck.add_better_tailpipe()
+#mod_tint = mod_truck.max_tint_windows()
+#mod_tailpipe = mod_truck.add_better_tailpipe()
 
-print(mod_lift_kit)
-print(mod_wheels)
-print(mod_tint)
+#print(mod_lift_kit)
+#print(mod_wheels)
+#print(mod_tailpipe)
+#print(mod_tint)
 
 ######### MOD CLASS TEST END #########
